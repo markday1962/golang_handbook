@@ -15,7 +15,7 @@ type people struct {
 
 func main() {
 	fmt.Println("Starting")
-	url := "http://api.open-notify.org/astro.json"
+	url := "http://api.open-notify.org/astros.json"
 
 	spaceClient := http.Client{
 		Timeout: time.Second * 2,
@@ -45,7 +45,8 @@ func main() {
 	p := people{}
 	err = json.Unmarshal(body, &p)
 	if err != nil {
-		log.Fatal(err)
+		log.Fatalf("unable to parse value: %q, error: %s",
+			string(body), err.Error())
 	}
 
 	fmt.Println(p.Number)
